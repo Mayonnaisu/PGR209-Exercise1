@@ -48,9 +48,40 @@ public class TestRomanNumerals {
     void testNumeral10(){
         assertEquals(convertToRomanNumeral(10), "X");
     }
+    @Test
+    void testNumeral11(){
+        assertEquals(convertToRomanNumeral(11), "XI");
+    }
+    @Test
+    void testNumeral12(){
+        assertEquals(convertToRomanNumeral(12), "XII");
+    }@Test
+    void testNumeral14(){
+        assertEquals(convertToRomanNumeral(14), "XIV");
+    }@Test
+    void testNumeral15(){
+        assertEquals(convertToRomanNumeral(15), "XV");
+    }@Test
+    void testNumeral16(){
+        assertEquals(convertToRomanNumeral(16), "XVI");
+    }
+    @Test
+    void testNumeral20(){
+        assertEquals(convertToRomanNumeral(20), "XX");
+    }
 
     private String convertToRomanNumeral(int number) {
         String result = "";
+        String numberString = String.valueOf(number);
+
+
+        if (number >= 10){
+            int tenthPlace = Integer.parseInt(String.valueOf(numberString.charAt(numberString.length() - 2)));
+            for (int i = 0; i < tenthPlace; i++) {
+                result += "X";
+            }
+            number = number - (10 * tenthPlace);
+        }
 
         if (number <= 3) {
             for (int i = 0; i < number; i++) {
@@ -58,18 +89,17 @@ public class TestRomanNumerals {
             }
             return result;
         }
-        else if (number == 4) return "IV";
-        else if (number == 5) return "V";
+        else if (number == 4) result += "IV";
+        else if (number == 5) result += "V";
         else if (number >= 6 && number <= 8) {
             int tempCalc = number - 5;
-            result = "V";
+            result += "V";
             for (int i = 0; i < tempCalc; i++) {
                 result += "I";
             }
             return result;
-        } else if (number == 9) return "IX";
-        else if (number == 10) return "X";
-        return "";
+        } else if (number == 9) result += "IX";
+        return result;
     }
 
 
