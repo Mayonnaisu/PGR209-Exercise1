@@ -102,10 +102,54 @@ public class TestRomanNumerals {
         assertEquals(convertToRomanNumeral(99), "XCIX");
     }
 
+    @Test
+    void testNumeral00(){
+        assertEquals(convertToRomanNumeral(100), "C");
+    }
+    @Test
+    void testNumeral140(){
+        assertEquals(convertToRomanNumeral(140), "CXL");
+    }
+    @Test
+    void testNumeral450(){
+        assertEquals(convertToRomanNumeral(450), "CDL");
+    }
+    @Test
+    void testPrint(){
+        for (int i = 0; i < 999; i++) {
+            System.out.println("" + i + " : " + convertToRomanNumeral(i));
+        }
+    }
+
     private String convertToRomanNumeral(int number) {
         String result = "";
         String numberString = String.valueOf(number);
 
+        if (number >= 100) {
+            int thousandthPlace = Integer.parseInt(String.valueOf(numberString.charAt(numberString.length() - 4)));
+            switch (thousandthPlace) {
+                case 1 -> result += "M";
+                case 2 -> result += "MM";
+                case 3 -> result += "MMM";
+            }
+            number = number - (1000 * thousandthPlace);
+        }
+
+        if (number >= 100) {
+            int hundredthPlace = Integer.parseInt(String.valueOf(numberString.charAt(numberString.length() - 3)));
+            switch (hundredthPlace) {
+                case 1 -> result += "C";
+                case 2 -> result += "CC";
+                case 3 -> result += "CCC";
+                case 4 -> result += "CD";
+                case 5 -> result += "D";
+                case 6 -> result += "DC";
+                case 7 -> result += "DCC";
+                case 8 -> result += "DCCC";
+                case 9 -> result += "CM";
+            }
+            number = number - (100 * hundredthPlace);
+        }
 
         if (number >= 10){
             int tenthPlace = Integer.parseInt(String.valueOf(numberString.charAt(numberString.length() - 2)));
