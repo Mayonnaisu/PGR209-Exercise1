@@ -69,6 +69,38 @@ public class TestRomanNumerals {
     void testNumeral20(){
         assertEquals(convertToRomanNumeral(20), "XX");
     }
+    @Test
+    void testNumeral40(){
+        assertEquals(convertToRomanNumeral(40), "XL");
+    }
+    @Test
+    void testNumeral44(){
+        assertEquals(convertToRomanNumeral(44), "XLIV");
+    }
+    @Test
+    void testNumeral46(){
+        assertEquals(convertToRomanNumeral(46), "XLVI");
+    }
+    @Test
+    void testNumeral48(){
+        assertEquals(convertToRomanNumeral(48), "XLVIII");
+    }
+    @Test
+    void testNumeral50(){
+        assertEquals(convertToRomanNumeral(50), "L");
+    }
+    @Test
+    void testNumeral84(){
+        assertEquals(convertToRomanNumeral(84), "LXXXIV");
+    }
+    @Test
+    void testNumeral86(){
+        assertEquals(convertToRomanNumeral(86), "LXXXVI");
+    }
+    @Test
+    void testNumeral99(){
+        assertEquals(convertToRomanNumeral(99), "XCIX");
+    }
 
     private String convertToRomanNumeral(int number) {
         String result = "";
@@ -77,8 +109,16 @@ public class TestRomanNumerals {
 
         if (number >= 10){
             int tenthPlace = Integer.parseInt(String.valueOf(numberString.charAt(numberString.length() - 2)));
-            for (int i = 0; i < tenthPlace; i++) {
-                result += "X";
+            switch (tenthPlace){
+                case 1 -> result += "X";
+                case 2 -> result += "XX";
+                case 3 -> result += "XXX";
+                case 4 -> result += "XL";
+                case 5 -> result += "L";
+                case 6 -> result += "LX";
+                case 7 -> result += "LXX";
+                case 8 -> result += "LXXX";
+                case 9 -> result += "XC";
             }
             number = number - (10 * tenthPlace);
         }
